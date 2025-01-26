@@ -8,12 +8,12 @@ base: &base
 arch_x86_64: 
   <<: *base
   arch: x86_64
-  cmdline: "{{ base.cmdline }} testx86"
+  cmdline: "{{ base.cmdline }}"
 
 arch_aarch64: &arch_aarch64
   <<: *base
   arch: aarch64
-  cmdline: "{{ base.cmdline }} testa86"
+  cmdline: "{{ base.cmdline }}"
 
 # Device configurations
 devices:
