@@ -1,0 +1,39 @@
+# Base definitions
+base: &base
+  grub-distributor: "BredOS"
+  timeout: 5
+  cmdline: "loglevel=3 quiet splash"
+
+# Architecture bases
+arch_x86_64: 
+  <<: *base
+  arch: x86_64
+  cmdline: "{{ base.cmdline }} testx86"
+
+arch_aarch64: &arch_aarch64
+  <<: *base
+  arch: aarch64
+  cmdline: "{{ base.cmdline }} testa86"
+
+# Device configurations
+devices:
+  # Radxa Orion O6
+  orion-o6:
+    dt:
+      <<: *arch_aarch64
+      dtb: "dtbs/cix/sky1-evb.dtb"
+      cmdline: "{{ arch_aarch64.cmdline }} console=ttyAMA2,115200 efi=noruntime earlycon=pl011,0x040d0000 arm-smmu-v3.disable_bypass=0  acpi=off"
+        
+    acpi:
+      <<: *arch_aarch64
+      cmdline: "{{ arch_aarch64.cmdline }} console=ttyAMA2,115200 efi=noruntime earlycon=pl011,0x040d0000 arm-smmu-v3.disable_bypass=0 cma=640M acpi=force"
+      tweaks:
+        python: |
+          print("Hello, world!")
+
+  "Radxa Rock 5B":
+    dt:
+      <<: *arch_aarch64
+      dtb: "dtbs/rockchip/rk3588-rock-5b.dtb"
+      cmdline: "{{ arch_aarch64.cmdline }} console=ttyFIQ0,1500000n8 console=tty1 console=both acpi=off"
+

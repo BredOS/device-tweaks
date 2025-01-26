@@ -1,0 +1,33 @@
+# Ignore package build artifacts
+pkg/
+src/
+*.pkg.tar.xz
+*.pkg.tar.zst
+*.tar.gz
+*.tar.bz2
+*.tar.xz
+*.tar.zst
+
+# Ignore log files
+*.log
+
+# Ignore temporary files
+*.tmp
+*.swp
+*.swo
+*~
+
+# Ignore backup files
+*.bak
+*.old
+*.orig
+
+# Ignore compiled object files
+*.o
+*.so
+*.a
+*.out
+
+# Ignore other common files
+.DS_Store
+Thumbs.db
